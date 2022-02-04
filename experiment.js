@@ -1,8 +1,38 @@
-const jsPsych = initJsPsych({
-    on_finish: function () {
-        jsPsych.data.displayData();
+jsPsych.init({
+    fullscreen: true,
+    on_finish: function (data) {
+        // Serialize the data
+        var promise = new Promise(function (resolve, reject) {
+            var data = jsPsych.data.dataAsJSON();
+            resolve(data);
+        })
+
+        promise.then(function (data) {
+            sendResults(data);
+        })
     }
+
 });
+
+async function sendResults(results) {
+    function handleErrors(response) {
+        if (!response.ok) {
+            throw Error(response.statusText);
+        }
+        return response;
+    }
+
+    fetch("/save", {
+        method: "POST",
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ data: results })
+    })
+        .then(handleErrors)
+        .then(response => console.log("Request complete! response: ", response))
+        .catch(error =>
+            jsPsych.data.localSave('cognitive_estimation_task_result.csv', 'csv')
+        );
+}
 
 const block_1 = [];
 const versionA = [];
