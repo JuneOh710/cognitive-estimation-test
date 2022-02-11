@@ -1,0 +1,14 @@
+{
+    "name": "Cognitive Estimation Test",
+    "exp_id": "cognitive-estimation-test",
+    "description": "A short series of questions to test the particpants.",
+    "instructions": "Type the best answer.",
+    "url": "https://github.com/JuneOh710/cognitive-estimation-test",
+    "template":"jspsych",
+    "contributors": [
+                     "Daniel J Wilson",
+                     "June Oh"
+                    ], 
+    "time":5,
+    "reference": []
+}
