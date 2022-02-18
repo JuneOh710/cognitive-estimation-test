@@ -1,4 +1,22 @@
-jsPsych.init({
+// === jsPsych v6 ===
+/*
+// jsPsych.init({
+//     fullscreen: true,
+//     on_finish: function (data) {
+//         // Serialize the data
+//         var promise = new Promise(function (resolve, reject) {
+//             var data = jsPsych.data.dataAsJSON();
+//             resolve(data);
+//         })
+
+//         promise.then(function (data) {
+//             sendResults(data);
+//         })
+//     }
+
+// });
+*/
+const settings = {
     fullscreen: true,
     on_finish: function (data) {
         // Serialize the data
@@ -12,8 +30,9 @@ jsPsych.init({
         })
     }
 
-});
+}
 
+const jsPsych = initJsPsych(settings);
 async function sendResults(results) {
     function handleErrors(response) {
         if (!response.ok) {
