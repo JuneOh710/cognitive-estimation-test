@@ -63,23 +63,25 @@ const order = number ? [versionA, versionB] : [versionB, versionA];
 
 const welcome = {
     type: jsPsychHtmlKeyboardResponse,
+    choices: ["Enter"],
     stimulus: `<p class="h3">Welcome to the experiment! </p>
      <p class="h3">
      In this task, we will be testing you ability to estimate the numerical answers of several questions.
      </p>
      <p class="h3">      
-     Press any key to continue on to the instructions.</p>
+     Press ENTER to continue on to the instructions.</p>
         `
 }
 block_1.push(welcome);
 
 const instructions_1 = {
     type: jsPsychHtmlKeyboardResponse,
+    choices: ["Enter"],
     stimulus: `<p class="h3">In this task, you will be estimating the answers to 9 questions. You will see one question at a time and your job is to
             make a reasonable guess as to what the answer is.</p><p class="h3"> Each question requires a numerical response in the units that are specified.
             Once you have come up with an estimate, please type the number into the textbox provided and click "continue" to move on to the 
             next question.</p><p class="h3">Once again, just a reminder that you are NOT expected to know the exact answer to these questions. We only ask that
-            you make a reasonable guess or give your best estimate.</p><p class="h3">When you are ready to begin, press any key.</p>
+            you make a reasonable guess or give your best estimate.</p><p class="h3">When you are ready to begin, press ENTER.</p>
         `
 }
 block_1.push(instructions_1);
@@ -250,12 +252,13 @@ versionB.push(question9B);
 
 const ending = {
     type: jsPsychHtmlKeyboardResponse,
+    choices: ["Enter"],
     stimulus: `
     <p class="h3">
     Thank you for participating in this study.
     </p>
     <p class="h3">
-    Press any key to exit this survey.
+    Press ENTER to exit this survey.
     </p>
         `
 }
