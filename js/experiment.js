@@ -1,21 +1,3 @@
-// === jsPsych v6 ===
-/*
-// jsPsych.init({
-//     fullscreen: true,
-//     on_finish: function (data) {
-//         // Serialize the data
-//         var promise = new Promise(function (resolve, reject) {
-//             var data = jsPsych.data.dataAsJSON();
-//             resolve(data);
-//         })
-
-//         promise.then(function (data) {
-//             sendResults(data);
-//         })
-//     }
-
-// });
-*/
 const settings = {
     fullscreen: true,
     on_finish: function (data) {
@@ -33,24 +15,26 @@ const settings = {
 }
 
 const jsPsych = initJsPsych(settings);
-async function sendResults(results) {
-    function handleErrors(response) {
-        if (!response.ok) {
-            throw Error(response.statusText);
-        }
-        return response;
-    }
+async function sendResults(data) {
+    $.ajax({
+        type: "POST",
+        url: '/save',
+        data: { "data": data },
+        success: function () { document.location = "/next" },
+        dataType: "application/json",
 
-    fetch("/save", {
-        method: "POST",
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ data: results })
-    })
-        .then(handleErrors)
-        .then(response => console.log("Request complete! response: ", response))
-        .catch(error =>
-            jsPsych.data.get().localSave('csv', 'cognitive_estimation_task_result.csv')
-        );
+        // Endpoint not running, local save
+        error: function (err) {
+
+            if (err.status == 200) {
+                document.location = "/next";
+            } else {
+
+                // If error, assue local save
+                jsPsych.data.get().localSave('csv', 'cognitive-estimation-test.csv');
+            }
+        }
+    });
 }
 
 const block_1 = [];
